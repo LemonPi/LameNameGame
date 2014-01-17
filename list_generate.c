@@ -11,10 +11,10 @@ typedef struct name_data {
 } name_data;
 
 // globals
+char* class_find;
 char* old_s;  // each time keep same pointer
 int points = 0;
 int student_n = 0;
-const char* class_find = "esc1t7";
 name_data* master_storage[100000];  // value is arbitrary
 
 // string splitting based off of strtok but returns '\0' on consecutive delimiter matches
@@ -41,7 +41,7 @@ char* strsplit(char* s, const char* delim) {
 }
 
 
-void initialize(FILE** infile) {
+void initialize(FILE** infile, char* class_find) {
     char line[257];  // max of 256 char per line, 1 for null terminator
     char* buffer_1;  // p* used to hold temporary split strings
     char* buffer_2;  // used to deal with name separation
@@ -89,6 +89,11 @@ void initialize(FILE** infile) {
 
 int play() {
     // printf("%d\n", student_n);
+    if (!student_n) {
+        printf("Your user list doesn't contain any matching members");
+        return 0;
+    }
+        
     int student_n_temp = rand() % student_n;
     name_data* student = master_storage[student_n_temp];
 
@@ -159,7 +164,15 @@ const char* messages[] = {
 int main(int argc, char** argv) {
     char* user_list = argv[1];
     FILE* infile = fopen(user_list, "r");
-    initialize(&infile);
+    char class_find[80] = "esc1t7";
+
+    printf("Enter group you want to name (ex. esc1t7): ");
+    fgets(class_find, 79, stdin);
+    class_find[strlen(class_find) - 1] = '\0';
+    if (!*class_find)  // by default as esc1t7
+        strcpy(class_find, "esc1t7");
+
+    initialize(&infile, class_find);
     srand(time(NULL));  // seed random generator
 
     while (play())  // returns 0 if no matches and stops playing 
