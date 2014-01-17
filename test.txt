@@ -1,0 +1,2 @@
+zhongsh3:x:808:399:Zhong Johnson,MP80124,guest,MA:/u/guests/zhongsh3:/shells/Guest
+zhuoweizhang:x:1012:421:Zhang Zhuowei,GB2141,guest,MA:/u/guests/zhang732:/shells/Guest  
