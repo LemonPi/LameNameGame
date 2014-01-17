@@ -7,14 +7,17 @@
 typedef struct name_data {
     char* utorid;
     char* names[10];
+    int split_n;
 } name_data;
 
+// globals
 char* old_s;  // each time keep same pointer
 int points = 0;
-int student_n;
+int student_n = 0;
 const char* class_find = "esc1t7";
 name_data* master_storage[100000];  // value is arbitrary
 
+// string splitting based off of strtok but returns '\0' on consecutive delimiter matches
 char* strsplit(char* s, const char* delim) {
     char *piece;  // each time use new piece
 
@@ -46,7 +49,7 @@ void initialize(FILE** infile) {
 
     for (; fgets(line, 256, *infile) != NULL; i++) {
         // only want to find students in class
-        if (!strstr(line, class_find)) 
+        if (!strstr(line, class_find))  // returns 0 on match
             continue;
 
         name_data* name = malloc(sizeof(name_data));
@@ -58,8 +61,7 @@ void initialize(FILE** infile) {
         if (new_line)  
             *new_line = '\0';  // removes newline at end
         buffer_1 = strsplit(line, " ,;:");  // splits string into tokens based on " ,;:/" char
-        // if (NULL == buffer_1)
-            // printf("buffer_1 is null\n");
+        name->split_n = 0;
 
         for (j = 0; buffer_1 != NULL; j++) {
             if (j == 0) {
@@ -75,6 +77,7 @@ void initialize(FILE** infile) {
                     strcpy(a_name, buffer_2);
                     lotsanames[name_i] = a_name;
                     buffer_2 = strtok(NULL, " ");
+                    name->split_n++;
                 }
                 break;
             }
@@ -84,35 +87,90 @@ void initialize(FILE** infile) {
     }
 }
 
-    /* Printing code for storing master_storage in file
-    for(int i_recall = 0; i_recall < i; i_recall++) {
-        for(int j_recall = 0; j_recall < 10; j_recall++) {
-            // Maximum number of 10 fields per line
-            printf("%d %d ", i_recall, j_recall);
-            printf("%s\n", master_storage[i_recall][j_recall]);
-        }
-        printf("\n");
-    }
-    */
-
-void play() {
+int play() {
+    // printf("%d\n", student_n);
     int student_n_temp = rand() % student_n;
     name_data* student = master_storage[student_n_temp];
+
+    char user_guess[80];
+    char* user_guesses[80];
+    // use temporary array to hold student names to avoid repeating entries
+    char* buffer_guess;
+    char* names_temp[80];
+    memmove(names_temp, student->names, 80*sizeof(char*));
     printf("Points: %d\nUtorid: %s\n", points, student->utorid);
+    printf("Can you remember their name: ");
+
+    // scans for user guess
+    fgets(user_guess, 100, stdin);
+    strtok(user_guess, "\n");
+
+    // splits user guess into first, last, middle, etc names
+    buffer_guess = strtok(user_guess, " ");
+    int guess_count = 0;
+    for(; buffer_guess != NULL; guess_count++) {
+        char* a_name = malloc(strlen(buffer_guess) + 1);
+        strcpy(a_name, buffer_guess);
+        user_guesses[guess_count] = a_name;
+        buffer_guess = strtok(NULL, " ");
+    }
+
+    // compares user guesses and real names
+    int matches = 0;
+    for(int i = 0; i < guess_count; i++) {
+        for(int j = 0; j < student->split_n; j++) {
+            // printf("[%s] [%s]\n", user_guesses[i], names_temp[j]);
+            if (!strcmp(names_temp[j], user_guesses[i])) {
+                names_temp[j] = "";
+                matches++;
+            }
+        }
+    }
+    // gives real name
+    printf("Real name: ");
+    // uses original array of names since temp one has removed elements
+    for (int i = 0; i < master_storage[student_n_temp]->split_n; i++) 
+        printf("%s ", master_storage[student_n_temp]->names[i]);
+    printf("\n");
+
+    if (!matches)
+        return 0;
+    points += 10 * matches;
+    return 1;
 }
 
-
+const char* messages[] = {
+    "Wow, I'm glad my name is simpler", // 0
+    "You pass!", // 50
+    "You have asian leveled up!", // 100
+    "Wow, factor of safety of 1.5", // 150
+    "Alas, your journey ended over 200 hero ...", // 200
+    "Keep going, quarter to a thousand!", // 250
+    "Memory spartan!", // 300
+    "That's enough", // 350
+    "You're probably addicted (420?)", // 400
+    "You don't listen, do you?", // 450
+    "You need professional help", // 500
+    "You are the professional help", // 550
+    "You've won the game :D", // 600
+    "You sold your soul to the devil (666)" // 650
+};
 
 int main(int argc, char** argv) {
     char* user_list = argv[1];
     FILE* infile = fopen(user_list, "r");
     initialize(&infile);
+    srand(time(NULL));  // seed random generator
 
-    while (1) {
-        play();
-    }
+    while (play())  // returns 0 if no matches and stops playing 
+        ;
 
-
+    // TODO will add shareable high score
+    int power_level = points / 50;
+    printf("Score: %d\n", points);
+    if (power_level >= sizeof(messages)/sizeof(char*))
+        power_level = sizeof(messages)/sizeof(char*) - 1;
+    printf("%s\n", messages[power_level]);
 
     return 0;
 }
