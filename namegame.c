@@ -85,6 +85,7 @@ void initialize(FILE** infile, char* class_find) {
             buffer_1 = strsplit(NULL, ",;:");  // strsplit recycles memory, old overrides new
         }
     }
+    printf("Population of filtered group: %d\n", student_n);
 }
 
 int play() {
