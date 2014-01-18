@@ -7,7 +7,7 @@ flashy:x:6982:220:Barry Allen,GB153,,:/u/support/deborah:/shells/Support
 manlyman:x:6983:2176:El Macho De  Fabico,htEeRtVfJ.M,,chepey:/u/d/fabicor1:/shells/csh1T4
 aquaman:x:6984:2155:Arthur  Curry,UGohIVAHl/c,,esc1t7:/u/a/gongxiny:/shells/csh1T7
 green42:x:6987:2157:Alan  Scott,voNwx7vgX6g,,ele1t4:/u/b/zahidhar:/shells/csh1T3
-kentclark34:x:6988:2167:Clark Zhang  Kent,Ff/yZfCqY.c,,ind1t6:/u/c/zhangl48:/shells/csh1T5
+superman:x:6988:2167:Kal El,Ff/yZfCqY.c,,ind1t6:/u/c/zhangl48:/shells/csh1T5
 youshank:x:6989:2160:Shank  You,5stVDbwh5Go,,lme1t5:/u/a/linshank:/shells/csh1T5
 clausefat:x:6990:220:Santa  Clause,,,:/u/support/fatemi:/shells/Support
 batman:x:6991:2173:Bruce Wayne,3A8Vnu3.XUQ,,mecpey:/u/d/gruenber:/shells/csh1T4
