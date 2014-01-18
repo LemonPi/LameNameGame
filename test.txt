@@ -1,2 +1,14 @@
-zhongsh3:x:808:399:Zhong Johnson,MP80124,guest,MA:/u/guests/zhongsh3:/shells/Guest
-zhuoweizhang:x:1012:421:Zhang Zhuowei,GB2141,guest,MA:/u/guests/zhang732:/shells/Guest  
+zhongsh3:x:6977:2155:Sheng  Zhong,L23u24lUmO6,,esc1t7:/u/b/zhongsh3:/shells/csh1T7
+feman:x:6978:2143:Anthony Edward  Stark,kEZ936/zgpc,,ecegrad:/u/c/yoshidat:/shells/csh0T8
+imthory:x:5924:2414:Thor Odinson,kdsg2/dkslg,,esc1t7:/u/c/thory:/shells/csh1T7
+hawkman:x:6979:2165:Carter  Hall,U76Y9pCeN5c,,esc1t5:/u/a/zhaoruiz:/shells/csh1T5
+wonderwoman:x:6980:2179:Diana  Prince,ym6ht4Gvnzc,,cpepey:/u/a/suerojon:/shells/csh1T4
+flashy:x:6982:220:Barry Allen,GB153,,:/u/support/deborah:/shells/Support
+manlyman:x:6983:2176:El Macho De  Fabico,htEeRtVfJ.M,,chepey:/u/d/fabicor1:/shells/csh1T4
+aquaman:x:6984:2155:Arthur  Curry,UGohIVAHl/c,,esc1t7:/u/a/gongxiny:/shells/csh1T7
+green42:x:6987:2157:Alan  Scott,voNwx7vgX6g,,ele1t4:/u/b/zahidhar:/shells/csh1T3
+kentclark34:x:6988:2167:Clark Zhang  Kent,Ff/yZfCqY.c,,ind1t6:/u/c/zhangl48:/shells/csh1T5
+youshank:x:6989:2160:Shank  You,5stVDbwh5Go,,lme1t5:/u/a/linshank:/shells/csh1T5
+clausefat:x:6990:220:Santa  Clause,,,:/u/support/fatemi:/shells/Support
+batman:x:6991:2173:Bruce Wayne,3A8Vnu3.XUQ,,mecpey:/u/d/gruenber:/shells/csh1T4
+spidey88:x:6992:2150:Peter Parker,BtKGKEitUVo,,trk1t7:/u/b/camho:/shells/csh1T7

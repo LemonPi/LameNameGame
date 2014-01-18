@@ -164,19 +164,19 @@ const char* messages[] = {
 int main(int argc, char** argv) {
     char* user_list = argv[1];
     FILE* infile = fopen(user_list, "r");
-    char class_find[80] = "esc1t7";
+    char class_find[80];
 
-    printf("Enter group you want to name (ex. esc1t7): ");
+    printf("Group to filter (: for all, esc1t7 by default): ");
     fgets(class_find, 79, stdin);
     class_find[strlen(class_find) - 1] = '\0';
-    if (!*class_find)  // by default as esc1t7
-        strcpy(class_find, "esc1t7");
+    if (!*class_find)
+        strcpy(class_find, "esc1t7"); // esc1t7 is default group
 
     initialize(&infile, class_find);
     srand(time(NULL));  // seed random generator
 
     while (play())  // returns 0 if no matches and stops playing 
-        ;
+        printf("---------------------------------------------------------\n");
 
     // TODO will add shareable high score
     int power_level = points / 50;
