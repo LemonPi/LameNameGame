@@ -45,9 +45,8 @@ void initialize(FILE** infile, char* class_find) {
     char line[257];  // max of 256 char per line, 1 for null terminator
     char* buffer_1;  // p* used to hold temporary split strings
     char* buffer_2;  // used to deal with name separation
-    int i = 0, j = 0;   // Counters, max j expected to be constant for each line
 
-    for (; fgets(line, 256, *infile) != NULL; i++) {
+    for (; fgets(line, 256, *infile) != NULL;) {
         // only want to find students in class
         if (!strstr(line, class_find))  // returns 0 on match
             continue;
@@ -63,13 +62,13 @@ void initialize(FILE** infile, char* class_find) {
         buffer_1 = strsplit(line, " ,;:");  // splits string into tokens based on " ,;:/" char
         name->split_n = 0;
 
-        for (j = 0; buffer_1 != NULL; j++) {
-            if (j == 0) {
+        for (int field = 0; buffer_1 != NULL; field++) {
+            if (field == 0) {
                 char* new_str = malloc(strlen(buffer_1)+1);  // temporary hoding string
                 strcpy(new_str, buffer_1);
                 name->utorid = new_str;
             }
-            else if (j == 4) {
+            else if (field == 4) {
                 char** lotsanames = name->names;
                 buffer_2 = strtok(buffer_1, " ");
                 for(int name_i = 0; buffer_2 != NULL; name_i++) {
@@ -81,7 +80,6 @@ void initialize(FILE** infile, char* class_find) {
                 }
                 break;
             }
-            // printf("[Set %d, %d to %s]\n", i, j, buffer_1);
             buffer_1 = strsplit(NULL, ",;:");  // strsplit recycles memory, old overrides new
         }
     }
@@ -89,7 +87,6 @@ void initialize(FILE** infile, char* class_find) {
 }
 
 int play() {
-    // printf("%d\n", student_n);
     if (!student_n) {
         printf("Your user list doesn't contain any matching members");
         return 0;
