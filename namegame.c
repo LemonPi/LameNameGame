@@ -51,6 +51,7 @@ void initialize(FILE** infile, char* class_find) {
         if (!strstr(line, class_find))  // returns 0 on match
             continue;
 
+        // only create a name_data object for each valid person
         name_data* name = malloc(sizeof(name_data));
         master_storage[student_n] = name;
         student_n++;
@@ -121,6 +122,8 @@ int play() {
     // compares user guesses and real names
     int matches = 0;
     for(int i = 0; i < guess_count; i++) {
+        if (user_guesses[i][0] > 96)
+            user_guesses[i][0] -= 32;    // if lower case, then change to upper case
         for(int j = 0; j < student->split_n; j++) {
             // printf("[%s] [%s]\n", user_guesses[i], names_temp[j]);
             if (!strcmp(names_temp[j], user_guesses[i])) {
